@@ -1,0 +1,213 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+int data;
+struct node *next;
+};
+
+struct node *head,*newnode,*temp,*begin_insert,*end_insert,*temp1,*custom_insert,*temp3,*prevnode,*custom_delete;
+struct node *prenode,*curnode,*postnode;
+void linked()
+{
+    printf("Hello world!\n");
+    printf("linked list is nothing but this!\n");
+    head=0;
+    int choice=1;
+    while (choice){
+        newnode=(struct node*) malloc(sizeof(struct node));
+        printf("enter data:");
+        scanf("%d",&newnode->data);
+        newnode->next=0;
+        if (head==0)
+            head=temp=newnode;
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("press 1 for next and 0 to close:");
+        scanf("%d",&choice);
+    }
+}
+void printing()
+{
+
+    printf ("printing linked list\n");
+    temp=head;
+    while(temp!=0)
+    {
+        printf("%d-",temp->data);
+        printf("%d",temp->next);
+        printf("\n");
+        temp=temp->next;
+    }
+}
+void bbegin_insert()
+{
+    printf ("begining insert\n");
+    //struct node *begin_insert;
+    begin_insert = (struct node*)malloc(sizeof(struct node));
+    printf ("enter data to insert:");
+    scanf("%d",&begin_insert->data);
+    begin_insert->next=head;
+    head=begin_insert;
+}
+void end_insertt()
+{
+    printf ("ending insert\n");
+    end_insert = (struct node*)malloc(sizeof(struct node));
+    printf ("enter data to insert:");
+    scanf("%d",&end_insert->data);
+    end_insert->next=0;
+    temp1=head;
+    while(temp1->next!=0)
+    {
+        temp1 =temp1->next;
+    }
+    temp1->next=end_insert;
+}
+void count()
+{
+    printf("count of nodes\n");
+    int count =0;
+    temp=head;
+    while (temp!=0)
+    {
+        count++;
+        temp=temp->next;
+    }
+    printf("%d number of nodes\n",count);
+}
+
+void customm_insert()
+{
+    printf ("custom insert\n");
+    int position,i=1;
+    custom_insert=(struct node*)malloc(sizeof(struct node));
+    printf ("enter the position");
+    scanf("%d",&position);
+    if(position>count)
+        printf("invalid position\n");
+    else
+        {
+          temp=head;
+          while(i<position)
+          {
+              temp=temp->next;
+              i++;
+          }
+          printf("enter data:");
+          scanf("%d",&custom_insert->data);
+          custom_insert->next=temp->next;
+          temp->next=custom_insert;
+        }
+}
+void del_beg()
+{
+    printf("delete from begining\n");
+
+    temp=head;
+    head=head->next;
+    free(temp);
+}
+void del_end()
+{
+    printf("delete from ending\n");
+        temp=head;
+        while(temp->next!=0)
+        {
+            prevnode=temp;
+            temp=temp->next;
+        }
+        if (temp==head)
+        {
+            head=0;
+            free(temp);
+        }
+        else
+        {
+            prevnode->next=0;
+            free(temp);
+        }
+
+}
+void cus_del()
+{
+    printf("deleting at specified position/custom delete \n");
+    int del_pos,i=1;
+    temp=head;
+    printf("enter position :");
+    scanf("%d",&del_pos);
+    while(i<del_pos-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    custom_delete=temp->next;
+    temp->next=custom_delete->next;
+    free(custom_delete);
+}
+void rev_link()
+{
+    printf("reverse a linked list\n");
+    prenode=0;
+    curnode=postnode=head;
+    while(postnode!=0)
+    {
+       postnode=postnode->next;
+       curnode->next=prenode;
+       prenode=curnode;
+       curnode=postnode;
+
+    head=prenode;
+    }
+}
+int main()
+{
+
+    linked();
+    printing();
+    int select;
+    printf("enter you case:");
+    scanf("%d",&select);
+    switch(select)
+    {
+    case 1:
+        bbegin_insert();
+        printing();
+        break;
+    case 2:
+        end_insertt();
+        printing();
+        break;
+    case 3:
+        count();
+        break;
+    case 4:
+        customm_insert();
+        printing();
+        break;
+    case 5:
+        del_beg();
+        printing();
+        break;
+    case 6:
+        del_end();
+        printing();
+        break;
+    case 7:
+        cus_del();
+        printing();
+        break;
+    case 8:
+        rev_link();
+        printing();
+        break;
+    default:
+        printf("case not valid");
+        break;
+
+    }
+    return 0;
+}
