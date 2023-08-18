@@ -6,7 +6,7 @@ int data;
 struct node *next;
 };
 
-struct node *head,*newnode,*temp,*begin_insert,*end_insert,*temp1,*custom_insert,*temp3,*prevnode,*custom_delete;
+node *head,*newnode,*temp,*begin_insert,*end_insert,*temp1,*custom_insert,*temp3,*prevnode,*custom_delete;
 struct node *prenode,*curnode,*postnode;
 void linked()
 {
